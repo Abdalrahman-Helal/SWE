@@ -656,5 +656,22 @@ const products = [
       "apparel",
       "mens"
     ]
+  
+  },
+  {
+    id: "1234",
+    image: "images/products/variations/plain-hooded-fleece-sweatshirt-teal.jpg",
+    name: "plain Hooded Fleece Sweatshirt - Teal",
+    rating: {
+      stars: 5,
+      count: 1000
+    },
+    priceCents: 200000,
+    keywords: [
+      "plain",
+      "hooded",
+      "apparel",
+      "mens"
+    ]
   }
 ];
