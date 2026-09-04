@@ -1,6 +1,8 @@
-import {cart as myCart} from '../data/cart.js';
+// import {cart as myCart} from '../data/cart.js';  // to use the same name as the variable in the data/cart.js file, we can use an alias to rename it to myCart
+// const cart = [];  // look at the above comment
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
 
-const cart = [];
 let productsHTML = '';
 
 products.forEach((product) => {
