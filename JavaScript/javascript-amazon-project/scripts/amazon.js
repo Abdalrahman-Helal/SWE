@@ -1,6 +1,6 @@
 // import {cart as myCart} from '../data/cart.js';  // to use the same name as the variable in the data/cart.js file, we can use an alias to rename it to myCart
 // const cart = [];  // look at the above comment
-import {cart, addToCart} from '../data/cart.js';
+import {cart, addToCart , calculateCartQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -58,19 +58,16 @@ products.forEach((product) => {
         </div>`;
 });
 
-
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 function updateCartQuantity() {
-  let cartQuantity = 0;
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-  });
-
+  const cartQuantity = calculateCartQuantity();
   document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
 
-document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+
+updateCartQuantity();
 const addedMessageTimeouts = {};
 
 
@@ -96,6 +93,7 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     addedMessageTimeouts[productId] = timeoutId;
   })
 });
+
 
 
 
