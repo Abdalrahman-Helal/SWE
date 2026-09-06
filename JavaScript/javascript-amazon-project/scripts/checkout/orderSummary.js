@@ -9,6 +9,7 @@ import { deliveryOptions, getDeliveryOption , calculateDeliveryDate } from '../.
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
+// impr
 
 export function renderOrderSummary() {
 
@@ -42,7 +43,7 @@ export function renderOrderSummary() {
       ${matchingProduct.name}
       </div>
       <div class="product-price">
-      $${formatCurrency(matchingProduct.priceCents)}
+      ${matchingProduct.getPrice()}
       </div>
       <div class="product-quantity js-product-quantity-${matchingProduct.id}">
       <span>
