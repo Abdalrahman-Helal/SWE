@@ -10,7 +10,7 @@ import { deliveryOptions, getDeliveryOption , calculateDeliveryDate } from '../.
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
-// impr
+
 
 export function renderOrderSummary() {
 
