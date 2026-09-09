@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+</head>
+<body>
+  <p>Calculator</p>
+    <p>
+      <button onclick="Calculation('1');">1 </button> 
+      <button onclick=" Calculation('2');">2 </button> 
+      <button onclick=" Calculation('3');">3 </button> 
+      <button onclick=" Calculation(' + ');">+ </button> 
+    
+    </p>
+
+    <p>
+      <button onclick=" Calculation('4'); ">4 </button> 
+      <button onclick=" Calculation('5'); ">5 </button> 
+      <button onclick=" Calculation('6'); ">6 </button> 
+      <button onclick=" Calculation(' - ');">- </button> 
+    </p>
+
+    <p>
+      <button onclick=" Calculation('7'); ">7 </button> 
+      <button onclick=" Calculation('8'); ">8 </button> 
+      <button onclick=" Calculation('8'); ">9 </button> 
+      <button onclick=" Calculation(' * '); ">* </button> 
+    </p>
+
+    <p>
+      <button onclick=" Calculation('0'); ">0 </button> 
+      <button onclick=" Calculation('.'); ">.</button> 
+      <button onclick=" calculation = eval(calculation); console.log(calculation); localStorage.setItem('calculation' , calculation);">=</button>
+      <button onclick=" Calculation(' / ');">/ </button> 
+    </p>
+
+    <p>
+      <button onclick="calculation =''; localStorage.removeItem('calculation'); console.log('cleared')">clear</button>
+    </p>
+  
+  <script>
+    let calculation = localStorage.getItem('calculation') || '';
+
+    function Calculation(parameter)
+    {
+      calculation += `${parameter}`; console.log(calculation) 
+      localStorage.setItem('calculation',calculation);
+    }
+  </script>
+  
+</body>
+</html>

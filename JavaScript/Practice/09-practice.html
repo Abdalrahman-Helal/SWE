@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Practice</title>
+      <style>
+      </style>
+  </head>
+  <body>
+    <input placeholder="name" class = 'js-input' onkeydown="handleSubmitKeydown(event);">
+    <button onclick="display();">Submit</button>
+    <p class = 'js-display'></p>
+    <script>
+      
+      function display()
+      {
+        const text = document.querySelector('.js-input').value;
+        document.querySelector('.js-display').innerHTML = text;
+      }
+
+      function handleSubmitKeydown(event)
+      {
+        if(event.key === 'Enter')
+        {
+          display();
+        }
+      }
+    </script> 
+  </body>
+</html>
+
+

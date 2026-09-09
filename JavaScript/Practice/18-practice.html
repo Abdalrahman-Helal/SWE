@@ -1,0 +1,106 @@
+<html>
+
+<body>
+  <script>
+
+
+    /* 18a
+    const xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('load',() => {
+      console.log(xhr.response);
+    })
+    xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+    xhr.send();
+    */
+
+
+    /* 18b
+
+    fetch(
+      'https://supersimplebackend.dev/greeting'
+  ).then((response) => {
+    return response.text();
+  }).then((text) => {
+    console.log(text);
+  })
+    */
+
+    /* 18c 
+  async function getGreeting() {
+    const response = await fetch('https://supersimplebackend.dev/greeting') 
+
+    const text = await response.text();
+    console.log(text);
+  }
+  getGreeting();
+  */
+
+    /* 18d 
+    async function sendData(){
+      const response = await fetch('https://supersimplebackend.dev/greeting', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: 'Helal'
+        })
+      });
+      const text = await response.text();
+      console.log(text);
+    }
+  
+    sendData();
+    */
+
+    /* 18e 18f
+    async function amazonRequest() {
+      try{
+        const response = await fetch('https://amazon.com');
+        const text = await response.text();
+        console.log(text);
+      } catch(error) {
+        console.log('CORS error. You request was blocked by the backend.');
+      }
+    }
+    amazonRequest();
+    */
+
+    async function sendData() {
+      try {
+
+        const response = await fetch('https://supersimplebackend.dev/greeting', {
+
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+
+          })
+        });
+
+        if(response.status >= 400)
+        {
+          throw response;
+        }
+
+        const text = await response.text();
+        console.log(text);
+
+      } catch(error) {
+        if(error.status === 400){
+          const errorMessage = await error.json();
+          console.log(errorMessage);
+        } else {
+          console.log('Network error. Pleae try again later.');
+        }
+      }
+    }
+    sendData();
+
+  </script>
+</body>
+
+</html>

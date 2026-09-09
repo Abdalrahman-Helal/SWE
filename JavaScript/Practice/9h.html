@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>9g</title>
+  </head>
+  
+  <body>
+    <input placeholder="Text" class = 'js-text' onkeyup=" display();">
+    <p class ='js-p'></p>
+    <script>
+      
+      function display()
+      {
+        const inputElement = document.querySelector('.js-text');
+        document.querySelector('.js-p').innerHTML = inputElement.value;
+      }
+    </script>
+  </body>
+</html>

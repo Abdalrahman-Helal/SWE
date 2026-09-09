@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Practice</title>
+      <style>
+      </style>
+  </head>
+
+  <body>
+    <button class = 'head' onclick="display('head');">head</button>
+    <button class = 'tail' onclick="display('tail');">tail</button>
+    <p class = 'display'></p>
+    <script>
+      // function toFahrenheit(celsius)
+      // {
+      //   return (celsius * 9 / 5) + 32;
+      // }
+      // console.log(toFahrenheit(25));
+
+      // function toCelsius(farhenhiet)
+      // {
+      //   return (farhenhiet - 32) * 5 / 9;
+      // }
+
+      // function convertTemperature(degree , unit)
+      // {
+      //   if(unit === 'C')
+      //   {
+      //     const result = toFahrenheit(degree);
+      //     return `result ${result}F`
+      //   }
+      //   else if(unit === 'F')
+      //   {
+      //     const result = toCelsius(degree);
+      //     return `result ${result}F`
+      //   }
+      // }
+
+
+      // console.log(toCelsius(25));
+      // console.log(toFahrenheit(86));
+      // console.log(convertTemperature(25, 'C'));
+      // console.log(convertTemperature(86, 'F'));
+
+      // function convertLength(length , from , to)
+      // {
+      //   if(from !== 'km' && from !== 'miles' && from !== 'ft')
+      //   {
+      //     return `invalid unit ${from}`
+      //   }
+      //   else if (to !== 'km' && to !== 'miles' && to !== 'ft') 
+      //   {
+      //     return `Invalid unit: ${to}`;
+      //   }
+
+      //   if(from === 'miles' && to === 'km')
+      //   {
+      //     return `length ${length * 1.6} km`;
+      //   }
+      //   else if(from ==='km' && to === 'miles'){
+      //     return `length ${length / 1.6} miles`;
+      //   }
+      //   else if(from === 'miles' && to === 'ft' )
+      //   {
+      //     return `length ${length * 5280} ft `;
+      //   }
+      //   else if(from === 'km' && to === 'ft' )
+      //   {
+      //     return `length ${length * 3281} ft `;
+      //   }
+      //   else if(from === to)
+      //   {
+      //     return `${length} ${to}`;
+      //   }
+      // }
+
+      // console.log(convertLength(5,'miles','km' ));
+      // console.log(convertLength(5,'miles','ft' ));
+      // console.log(convertLength(5,'km','ft' ));
+      // console.log(convertLength(5,'km','km' ));
+      // console.log(convertLength(5,'lbs','lbs' ));
+
+
+      // 8 Object Practice
+      // const BasketballProduct = {
+      //   name : 'Basketball',
+      //   price : 2500
+      // };
+      // const BasketballProduct2 = {
+      //   name : 'Basketball2',
+      //   price : 2095
+      // };
+
+      // // console.log(BasketballProduct);
+      // // BasketballProduct.price += 500;
+      // // console.log(BasketballProduct);
+      // // BasketballProduct['delivery-time'] = '3 days'
+      // // console.log(BasketballProduct);
+
+      // function comparePrice(product1 ,product2)
+      // {
+      //   return product1.price > product2.price ? product1 : product2;
+      // }
+
+      // console.log(comparePrice(BasketballProduct , BasketballProduct2));
+
+      // function isSameProduct(product1 ,product2)
+      // {
+      //   if(product1.name === product2.name && product1.price === product2.price)
+      //   {
+      //     return true;
+      //   }
+      //   return false;
+      // }
+      // console.log(isSameProduct(BasketballProduct , BasketballProduct2));
+
+      // let message = 'hello';
+      // let messageUpper = 'HELLO';
+      // console.log(messageUpper.toLowerCase());
+      // console.log(message.toUpperCase());
+      // console.log(message.repeat(2));
+      
+
+
+      // 09- Practice
+
+      // console.log(document.querySelector('.js-9a').innerHTML)
+      // document.querySelector('.js-9b').innerHTML = '9b Done';
+
+
+      function display(value)
+      {
+        document.querySelector('.display').innerHTML = `You chose ${value}`;
+      }
+
+
+    </script> 
+  </body>
+</html>
+
+
