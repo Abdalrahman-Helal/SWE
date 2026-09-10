@@ -294,22 +294,66 @@
 
 // 4.3 Static attributes and method
 
-class Dog {
-  static instanCount : number = 0;
-  name: string;
-  constructor(name: string) {
-    Dog.instanCount++;
-    this.name = name;
+// class Dog {
+//   static instanCount : number = 0;
+//   name: string;
+//   constructor(name: string) {
+//     Dog.instanCount++;
+//     this.name = name;
+//   }
+
+//   static DecreaseCount() {
+//     this.instanCount--;
+//   }
+// }
+
+// const dog1 = new Dog("Leo");
+// const dog2 = new Dog("Max");
+
+// console.log(Dog.instanCount);
+// Dog.DecreaseCount();
+// console.log(Dog.instanCount);
+
+// 4.4 Generics
+
+class DataStore<T> {
+  private items: T[] = [];
+
+  addItem(item: T): void { 
+    this.items.push(item);
   }
 
-  static DecreaseCount() {
-    this.instanCount--;
+  getItem(index: number): T { 
+    return this.items[index];
+  }
+  
+  removeItem(index: number): void {
+    this.items.splice(index, 1);
+  }
+
+  getAllItems(): T[] {
+    return this.items;
   }
 }
 
-const dog1 = new Dog("Leo");
-const dog2 = new Dog("Max");
 
-console.log(Dog.instanCount);
-Dog.DecreaseCount();
-console.log(Dog.instanCount);
+interface User {
+  name: string;
+  id: number;
+}
+const data = new DataStore<User>();
+
+
+function getValue<K, V>(key: K , value1: V , value2: V): V {
+  if(key) {
+    return value1;
+  }
+  return value2;
+}
+
+const n1: number = 1;
+const n2: number = 2;
+
+getValue<string, number>('hello', n1, n2);
+getValue('hello', n1, n2);
+
