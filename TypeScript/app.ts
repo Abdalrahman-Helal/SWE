@@ -219,29 +219,74 @@
 
 // abstract class 
 
-abstract class Animal {
-  abstract makeSound(duration: number): void;
+// abstract class Animal {
+//   abstract makeSound(duration: number): void;
 
-  move(duration: number) {
-    console.log("Moving along ...");
-    this.makeSound(duration);
+//   move(duration: number) {
+//     console.log("Moving along ...");
+//     this.makeSound(duration);
+//   }
+// }
+
+// class Dog extends Animal {
+//   makeSound(duration: number): void {
+//     console.log('woof woof');
+//   }
+// }
+
+// class Cat extends Animal {
+//   makeSound(duration: number): void {
+//     console.log('meow meow');
+//   }
+// }
+
+// const dog = new Dog();
+// dog.move(10);
+
+// const cat = new Cat();
+// cat.move(5);
+
+
+// 4.2 Classes and interfaces 
+
+interface Animal {
+  speak(): void
+}
+
+class Dog implements Animal {
+  private name: string;
+  private color: string;
+
+  constructor(name: string, color: string) {
+    this.name = name;
+    this.color = color;
+  }
+
+  speak() {
+    console.log(`I am ${this.name} and I am ${this.color}`)
+  }
+  test() {
+    return 1;
   }
 }
 
-class Dog extends Animal {
-  makeSound(duration: number): void {
-    console.log('woof woof');
+// const dog: Animal = new Dog("Leo" , "Brown");
+
+
+class Cat implements Animal {
+  speak() {
+    console.log("Meow");
   }
 }
 
-class Cat extends Animal {
-  makeSound(duration: number): void {
-    console.log('meow meow');
-  }
-}
-
-const dog = new Dog();
-dog.move(10);
-
+const dog = new Dog("Leo" , "Brown");
 const cat = new Cat();
-cat.move(5);
+const animal: Animal[] = [cat, dog];
+
+function makeSound(animal: Animal) {
+  animal.speak();
+}
+
+makeSound(dog);
+makeSound(cat);
+
