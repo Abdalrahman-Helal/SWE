@@ -249,44 +249,67 @@
 
 // 4.2 Classes and interfaces 
 
-interface Animal {
-  speak(): void
-}
+// interface Animal {
+//   speak(): void
+// }
 
-class Dog implements Animal {
-  private name: string;
-  private color: string;
+// class Dog implements Animal {
+//   private name: string;
+//   private color: string;
 
-  constructor(name: string, color: string) {
+//   constructor(name: string, color: string) {
+//     this.name = name;
+//     this.color = color;
+//   }
+
+//   speak() {
+//     console.log(`I am ${this.name} and I am ${this.color}`)
+//   }
+//   test() {
+//     return 1;
+//   }
+// }
+
+// // const dog: Animal = new Dog("Leo" , "Brown");
+
+
+// class Cat implements Animal {
+//   speak() {
+//     console.log("Meow");
+//   }
+// }
+
+// const dog = new Dog("Leo" , "Brown");
+// const cat = new Cat();
+// const animal: Animal[] = [cat, dog];
+
+// function makeSound(animal: Animal) {
+//   animal.speak();
+// }
+
+// makeSound(dog);
+// makeSound(cat);
+
+
+
+// 4.3 Static attributes and method
+
+class Dog {
+  static instanCount : number = 0;
+  name: string;
+  constructor(name: string) {
+    Dog.instanCount++;
     this.name = name;
-    this.color = color;
   }
 
-  speak() {
-    console.log(`I am ${this.name} and I am ${this.color}`)
-  }
-  test() {
-    return 1;
+  static DecreaseCount() {
+    this.instanCount--;
   }
 }
 
-// const dog: Animal = new Dog("Leo" , "Brown");
+const dog1 = new Dog("Leo");
+const dog2 = new Dog("Max");
 
-
-class Cat implements Animal {
-  speak() {
-    console.log("Meow");
-  }
-}
-
-const dog = new Dog("Leo" , "Brown");
-const cat = new Cat();
-const animal: Animal[] = [cat, dog];
-
-function makeSound(animal: Animal) {
-  animal.speak();
-}
-
-makeSound(dog);
-makeSound(cat);
-
+console.log(Dog.instanCount);
+Dog.DecreaseCount();
+console.log(Dog.instanCount);
