@@ -81,7 +81,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // sum("message", 1,2,3,4,5,6,7,8,9,10)
 // sum("message", 1,2,3,4,5,6,7,8,9,10)
 // function getItemLength(name: string): number
-// function getItemLength(name: string[]): number 
+// function getItemLength(name: string[]): number
 // function getItemLength(nameOrNames: unknown): number {
 //   if(typeof nameOrNames ==="string"){
 //     return nameOrNames.length;
@@ -91,7 +91,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   return 0;
 // }
 // console.log(getItemLength(""));
-// 3.3 interfaces 
+// 3.3 interfaces
 // interface Person {
 //   name: string;
 //   age: number;
@@ -139,22 +139,52 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // }
 // console.log(getPerson(person));
 // 4.1 Classes and abstract classes
-class Person {
-    name;
-    constructor(name) {
-        this.name = name;
-    }
-    greet() {
-        console.log(`Hello, my name is ${this.name}`);
-    }
-    getName() {
-        return this.name;
-    }
-    setName(name) {
-        this.name = name;
+// class Person {
+//   // private name: string; // public , protected
+//   protected name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//     this.greet();
+//   }
+//   private greet() {
+//     console.log(`Hello, my name is ${this.name}`);
+//   }
+//   getName() {
+//     if (this.name.length < 2) return "";
+//     return this.name;
+//   }
+//   setName(name: string) {
+//     if (name.length < 5) return;
+//     this.name = name;
+//   }
+// }
+// class Employee extends Person {
+//   callMe() {
+//     console.log(this.name);
+//   }
+// }
+// const p1 = new Person("ahmed");
+// p1.setName("helal");
+// console.log(p1.getName());
+// abstract class 
+class Animal {
+    move(duration) {
+        console.log("Moving along ...");
+        this.makeSound(duration);
     }
 }
-const p1 = new Person("Tim");
-p1.setName("helal");
-console.log(p1.getName());
+class Dog extends Animal {
+    makeSound(duration) {
+        console.log('woof woof');
+    }
+}
+class Cat extends Animal {
+    makeSound(duration) {
+        console.log('meow meow');
+    }
+}
+const dog = new Dog();
+dog.move(10);
+const cat = new Cat();
+cat.move(5);
 //# sourceMappingURL=app.js.map

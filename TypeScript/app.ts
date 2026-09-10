@@ -182,35 +182,66 @@
 
 // 4.1 Classes and abstract classes
 
-class Person {
-  // private name: string; // public , protected
-  protected name: string;
-  constructor(name: string) {
-    this.name = name;
-    this.greet();
-  }
+// class Person {
+//   // private name: string; // public , protected
+//   protected name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//     this.greet();
+//   }
 
-  private greet() {
-    console.log(`Hello, my name is ${this.name}`);
-  }
+//   private greet() {
+//     console.log(`Hello, my name is ${this.name}`);
+//   }
 
-  getName() {
-    if (this.name.length < 2) return "";
-    return this.name;
-  }
+//   getName() {
+//     if (this.name.length < 2) return "";
+//     return this.name;
+//   }
 
-  setName(name: string) {
-    if (name.length < 5) return;
-    this.name = name;
+//   setName(name: string) {
+//     if (name.length < 5) return;
+//     this.name = name;
+//   }
+// }
+
+// class Employee extends Person {
+//   callMe() {
+//     console.log(this.name);
+//   }
+// }
+
+// const p1 = new Person("ahmed");
+// p1.setName("helal");
+// console.log(p1.getName());
+
+
+
+// abstract class 
+
+abstract class Animal {
+  abstract makeSound(duration: number): void;
+
+  move(duration: number) {
+    console.log("Moving along ...");
+    this.makeSound(duration);
   }
 }
 
-class Employee extends Person {
-  callMe() {
-    console.log(this.name);
+class Dog extends Animal {
+  makeSound(duration: number): void {
+    console.log('woof woof');
   }
 }
 
-const p1 = new Person("ahmed");
-p1.setName("helal");
-console.log(p1.getName());
+class Cat extends Animal {
+  makeSound(duration: number): void {
+    console.log('meow meow');
+  }
+}
+
+const dog = new Dog();
+dog.move(10);
+
+const cat = new Cat();
+cat.move(5);
