@@ -98,20 +98,18 @@
 //   ],
 // );
 
-
 //--------------- 3.2 Advanced function types
 
 // function sum(str: string,...number: number[]){
-  
+
 // }
 
 // sum("message", 1,2,3)
 // sum("message", 1,2,3,4,5,6,7,8,9,10)
 // sum("message", 1,2,3,4,5,6,7,8,9,10)
 
-
 // function getItemLength(name: string): number
-// function getItemLength(name: string[]): number 
+// function getItemLength(name: string[]): number
 // function getItemLength(nameOrNames: unknown): number {
 //   if(typeof nameOrNames ==="string"){
 //     return nameOrNames.length;
@@ -124,10 +122,7 @@
 
 // console.log(getItemLength(""));
 
-
-
-
-// 3.3 interfaces 
+// 3.3 interfaces
 
 // interface Person {
 //   name: string;
@@ -147,7 +142,6 @@
 
 // // person.hello();
 
-
 // // interface Manager extends Employee, Person{
 // //   employees : Person[]
 // // }
@@ -155,7 +149,6 @@
 // // interface Employee extends Person {
 // //   employeeId: number;
 // // }
-
 
 // // const worker1: Employee = {
 // //   name : 'ahmed',
@@ -171,14 +164,12 @@
 // //   employeeId: 15
 // // }
 
-
 // // const manager: Manager = {
 // //   name: "helal",
 // //   age: 25,
 // //   employees: [worker1, worker2],
 // //   employeeId: 1
 // // }
-
 
 // function getPerson(p: Person) : Person {
 //   return {
@@ -188,3 +179,38 @@
 // }
 
 // console.log(getPerson(person));
+
+// 4.1 Classes and abstract classes
+
+class Person {
+  // private name: string; // public , protected
+  protected name: string;
+  constructor(name: string) {
+    this.name = name;
+    this.greet();
+  }
+
+  private greet() {
+    console.log(`Hello, my name is ${this.name}`);
+  }
+
+  getName() {
+    if (this.name.length < 2) return "";
+    return this.name;
+  }
+
+  setName(name: string) {
+    if (name.length < 5) return;
+    this.name = name;
+  }
+}
+
+class Employee extends Person {
+  callMe() {
+    console.log(this.name);
+  }
+}
+
+const p1 = new Person("ahmed");
+p1.setName("helal");
+console.log(p1.getName());
