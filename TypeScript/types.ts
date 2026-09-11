@@ -1,0 +1,4 @@
+interface Client {
+  response: string
+}
+

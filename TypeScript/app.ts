@@ -581,21 +581,38 @@
 
 // 6.1 Modules (import and export )
 
-import anything ,{add, sub} from "./util.js"
+// import anything ,{add, sub} from "./util.js"
 
 
-const result = add(1,2);
-console.log(result);
-console.log(anything());
+// const result = add(1,2);
+// console.log(result);
+// console.log(anything());
 
 
-// ---------
+// // ---------
 
-const helloWorld = 'Helal';
-export default helloWorld;
+// const helloWorld = 'Helal';
+// export default helloWorld;
 
 
 
+// 6.2 Namespaces
+namespace Utils {
+  export class Myclass {
+
+  }
+
+  export function myFunc() {}
+
+    export const NAME = 'Helal';
+
+    export interface NewType {
+      name: string
+    }
+}
+
+
+const result: Utils.NewType = Utils.myFunc()
 
 
 
