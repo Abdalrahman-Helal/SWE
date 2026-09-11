@@ -382,45 +382,90 @@
   
 // }
 
-interface BusinessPartner {
-  name: string;
-}
+// interface BusinessPartner {
+//   name: string;
+// }
 
-interface ContactDetails {
-  email: string;
-  phone: string;
-}
-
-
-type BusinessContact = BusinessPartner & ContactDetails;
-
-const contact: BusinessContact = {
-  name: "helal",
-  email: "helal@example.com",
-  phone: "123-456-7890"
-}
-console.log(contact);
+// interface ContactDetails {
+//   email: string;
+//   phone: string;
+// }
 
 
-interface Individual {
-  name: string;
-  birthday: Date;
-}
+// type BusinessContact = BusinessPartner & ContactDetails;
 
-interface Organization {
-  companyName: string;
-  workPhone: string;
-}
-
-type ContactType = Individual | Organization
-
-type CompContact = Individual & Organization
+// const contact: BusinessContact = {
+//   name: "helal",
+//   email: "helal@example.com",
+//   phone: "123-456-7890"
+// }
+// console.log(contact);
 
 
-function addContact(contact: ContactType) {
-  if("birthday" in contact) {
-    console.log(contact.name , contact.birthday)
+// interface Individual {
+//   name: string;
+//   birthday: Date;
+// }
+
+// interface Organization {
+//   companyName: string;
+//   workPhone: string;
+// }
+
+// type ContactType = Individual | Organization
+
+// type CompContact = Individual & Organization
+
+
+// function addContact(contact: ContactType) {
+//   if("birthday" in contact) {
+//     console.log(contact.name , contact.birthday)
+//   } else {
+//     console.log(contact.companyName , contact.workPhone);
+//   }
+// }
+
+
+// 5.3 Type guards
+
+type StringOrNumber = string | number;
+
+function add1(value: StringOrNumber): StringOrNumber {
+  if(typeof value === 'string') {
+    return value + "1";
   } else {
-    console.log(contact.companyName , contact.workPhone);
+    return value + 1;
   }
 }
+
+class Dog {
+  firstName: string;
+  lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+}
+
+class Cat {
+  firstName: string
+
+  constructor(firstName: string) {
+    this.firstName = firstName;
+  }
+}
+
+function isDog(pet: Dog | Cat): pet is Dog {
+  return (pet as Dog).lastName !== undefined;
+}
+
+function getName(animal: Dog | Cat) {
+  // if(animal instance of Cat) {
+  if(isDog(animal)) {
+    console.log("the name is ", animal.firstName + " " + animal.lastName);
+  } else {
+    console.log("the name is ", animal.firstName);
+  }
+}
+
