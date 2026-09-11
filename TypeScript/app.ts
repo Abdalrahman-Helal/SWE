@@ -362,14 +362,65 @@
 
 // 5.1 type aliases
 
-type Coordinate = [number, number]
+// type Coordinate = [number, number]
 
-type list = string[][];
-function compareCoods(
-  p1: Coordinate,
-  p2: Coordinate
-): Coordinate {
-  return [p1[0], p2[1]];
+// type list = string[][];
+// function compareCoods(
+//   p1: Coordinate,
+//   p2: Coordinate
+// ): Coordinate {
+//   return [p1[0], p2[1]];
+// }
+
+// const coords: Coordinate[] = [];
+
+// 5.2 Union and intersection
+
+// type StringOrNumber = string | number | boolean;
+
+// function accepVal(val: StringOrNumber) {
+  
+// }
+
+interface BusinessPartner {
+  name: string;
 }
 
-const coords: Coordinate[] = [];
+interface ContactDetails {
+  email: string;
+  phone: string;
+}
+
+
+type BusinessContact = BusinessPartner & ContactDetails;
+
+const contact: BusinessContact = {
+  name: "helal",
+  email: "helal@example.com",
+  phone: "123-456-7890"
+}
+console.log(contact);
+
+
+interface Individual {
+  name: string;
+  birthday: Date;
+}
+
+interface Organization {
+  companyName: string;
+  workPhone: string;
+}
+
+type ContactType = Individual | Organization
+
+type CompContact = Individual & Organization
+
+
+function addContact(contact: ContactType) {
+  if("birthday" in contact) {
+    console.log(contact.name , contact.birthday)
+  } else {
+    console.log(contact.companyName , contact.workPhone);
+  }
+}
