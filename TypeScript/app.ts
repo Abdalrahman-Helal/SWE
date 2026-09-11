@@ -474,41 +474,109 @@
 
 // 5.4 discriminated unions
 
-type log = Warning | Info | Success;
+// type log = Warning | Info | Success;
 
-interface Warning {
-  type: "warning"
-  msg:string;
-}
+// interface Warning {
+//   type: "warning"
+//   msg:string;
+// }
 
-interface Info {
-  type: "info"
-  text: string;
-}
+// interface Info {
+//   type: "info"
+//   text: string;
+// }
 
-interface Success {
-  type: "sucess"
-  message: string;
-}
+// interface Success {
+//   type: "sucess"
+//   message: string;
+// }
 
 
-function handleMsg(log: log){
+// function handleMsg(log: log){
 
-  switch(log.type) {
-    case "warning":
-      console.log(log.msg);
-      break;
+//   switch(log.type) {
+//     case "warning":
+//       console.log(log.msg);
+//       break;
       
-    case "info":
-      console.log(log.text);
-      break;
+//     case "info":
+//       console.log(log.text);
+//       break;
       
-    case "sucess":
-      console.log(log. message);
+//     case "sucess":
+//       console.log(log. message);
 
-      break;
-  }
+//       break;
+//   }
+// }
+
+
+// 5.5 Utility Types 
+
+interface Todo {
+  title: string;
+  description: string;  
 }
+
+const updateTodo = (todo: Partial<Todo>) => {
+  // partial makes all properties optional
+}
+
+const myTodo: Readonly<Todo> = { title: "learn typescript" }; // Readonly makes all properties read-only amd cannot be modified
+myTodo.title = "hello"; // Error: Cannot assign to 'title' because it is a read-only property.
+
+
+
+interface PageInfo {
+  title: string;
+}
+// Record is a utility type that allows you to create an object type with specified keys and values. In this case, we are creating a Record type where the keys are strings and the values are of type PageInfo.
+
+const pages: Record<string , PageInfo> = {
+  home: { title: "Home page" },
+  about: { title: "About page" },
+  contact: { title: "Contact page" }
+};
+
+const pageNumbers: Record<number, PageInfo> = {
+  0: { title: "Page 0" },
+  1: { title: "Page 1" },
+  2: { title: "Page 2" }
+};
+
+
+
+// pick is a utility type that allows you to create a new type by selecting specific properties from an existing type. In this case, we are creating a new type TodoPreview that only includes the title and completed properties from the Todo interface.
+
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+type TodoPreview = Pick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: "Clean room",
+  completed: false
+};
+
+
+
+// omit is a utility type that allows you to create a new type by excluding specific properties from an existing type. In this case, we are creating a new type TodoPreview2 that excludes the completed property from the Todo interface.
+
+interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+type TodoPreview2 = Omit<Todo, "id">;
+
+const todo2: TodoPreview2 = {
+  title: "Clean room",
+  completed: false
+};
 
 
 
