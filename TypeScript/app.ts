@@ -428,44 +428,92 @@
 
 // 5.3 Type guards
 
-type StringOrNumber = string | number;
+// type StringOrNumber = string | number;
 
-function add1(value: StringOrNumber): StringOrNumber {
-  if(typeof value === 'string') {
-    return value + "1";
-  } else {
-    return value + 1;
+// function add1(value: StringOrNumber): StringOrNumber {
+//   if(typeof value === 'string') {
+//     return value + "1";
+//   } else {
+//     return value + 1;
+//   }
+// }
+
+// class Dog {
+//   firstName: string;
+//   lastName: string;
+
+//   constructor(firstName: string, lastName: string) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//   }
+// }
+
+// class Cat {
+//   firstName: string
+
+//   constructor(firstName: string) {
+//     this.firstName = firstName;
+//   }
+// }
+
+// function isDog(pet: Dog | Cat): pet is Dog {
+//   return (pet as Dog).lastName !== undefined;
+// }
+
+// function getName(animal: Dog | Cat) {
+//   // if(animal instance of Cat) {
+//   if(isDog(animal)) {
+//     console.log("the name is ", animal.firstName + " " + animal.lastName);
+//   } else {
+//     console.log("the name is ", animal.firstName);
+//   }
+// }
+
+
+
+
+// 5.4 discriminated unions
+
+type log = Warning | Info | Success;
+
+interface Warning {
+  type: "warning"
+  msg:string;
+}
+
+interface Info {
+  type: "info"
+  text: string;
+}
+
+interface Success {
+  type: "sucess"
+  message: string;
+}
+
+
+function handleMsg(log: log){
+
+  switch(log.type) {
+    case "warning":
+      console.log(log.msg);
+      break;
+      
+    case "info":
+      console.log(log.text);
+      break;
+      
+    case "sucess":
+      console.log(log. message);
+
+      break;
   }
 }
 
-class Dog {
-  firstName: string;
-  lastName: string;
 
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-}
 
-class Cat {
-  firstName: string
 
-  constructor(firstName: string) {
-    this.firstName = firstName;
-  }
-}
 
-function isDog(pet: Dog | Cat): pet is Dog {
-  return (pet as Dog).lastName !== undefined;
-}
 
-function getName(animal: Dog | Cat) {
-  // if(animal instance of Cat) {
-  if(isDog(animal)) {
-    console.log("the name is ", animal.firstName + " " + animal.lastName);
-  } else {
-    console.log("the name is ", animal.firstName);
-  }
-}
+
 
