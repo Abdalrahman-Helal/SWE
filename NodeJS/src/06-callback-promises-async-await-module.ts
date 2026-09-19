@@ -1,6 +1,3 @@
-// import { rejects } from "node:assert";
-// import { resolve } from "node:dns";
-
 type User = {
   id: number;
   name: string;
