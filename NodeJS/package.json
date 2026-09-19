@@ -8,7 +8,8 @@
     "dev": "tsx watch src/index.ts",
     "build":"tsc",
     "01": "tsx src/01-process-object",
-    "02": "tsx src/02-crypto-module.ts"
+    "02": "tsx src/02-crypto-module.ts",
+    "03": "tsx src/03-os-module.ts"
   },
   "keywords": [],
   "author": "",
