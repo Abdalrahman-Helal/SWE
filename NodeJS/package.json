@@ -9,7 +9,8 @@
     "build":"tsc",
     "01": "tsx src/01-process-object",
     "02": "tsx src/02-crypto-module.ts",
-    "03": "tsx src/03-os-module.ts"
+    "03": "tsx src/03-os-module.ts",
+    "04": "tsx src/04-path-module.ts"
   },
   "keywords": [],
   "author": "",
