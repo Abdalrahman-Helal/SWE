@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // JavaScript version to generate
+    "module": "NodeNext", // Module system used by Node.js
+    "moduleResolution": "NodeNext", // How TypeScript resolves imports
+
+    "rootDir": "./src", // Directory containing TypeScript source files
+    "outDir": "./dist", // Directory where compiled JavaScript files are generated
+
+    "strict": true, // Enables strict type checking
+    "esModuleInterop": true, // Makes CommonJS and ES Module imports work together
+    "skipLibCheck": true, // Skips type checking of .d.ts files in node_modules
+
+    "forceConsistentCasingInFileNames": true, // Ensures consistent file-name casing
+
+    "sourceMap": true, // Generates .map files for debugging TypeScript
+
+    "declaration": true, // Generates .d.ts declaration files
+
+    "noUnusedLocals": true, // Reports unused local variables
+    "noUnusedParameters": true, // Reports unused function parameters
+
+    "strictNullChecks": true, // Checks null and undefined more strictly
+    "noUncheckedIndexedAccess": true, // Adds undefined when accessing arrays/objects by index
+
+    "types": ["node"]
+  },
+
+  "include": [
+    "src/**/*.ts" // Include all TypeScript files inside src
+  ],
+
+  "exclude": [
+    "node_modules", // Ignore installed packages
+    "dist" // Ignore compiled JavaScript files
+  ]
+}
