@@ -14,7 +14,8 @@
     "05": "tsx src/05-timers-module.ts",
     "06": "tsx src/06-callback-promises-async-await-module.ts",
     "07": "tsx src/07-fs-module.ts",
-    "08": "tsx src/08-buffer-module.ts"
+    "08": "tsx src/08-buffer-module.ts",
+    "09": "tsx src/09-url-module.ts"
   },
   "keywords": [],
   "author": "",
