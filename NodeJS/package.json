@@ -16,7 +16,8 @@
     "07": "tsx src/07-fs-module.ts",
     "08": "tsx src/08-buffer-module.ts",
     "09": "tsx src/09-url-module.ts",
-    "10": "tsx src/10-event-emitter.ts"
+    "10": "tsx src/10-event-emitter.ts",
+    "11": "tsx src/11-streams.ts"
   },
   "keywords": [],
   "author": "",
