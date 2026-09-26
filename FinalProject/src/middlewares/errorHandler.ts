@@ -15,6 +15,8 @@ export function errorHandler(
       success: false,
       message: err.message,
     });
+
+    return;
   }
 
   logger.error({err}, 'Unhandled error')
