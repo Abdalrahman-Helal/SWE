@@ -1,6 +1,5 @@
 import type { Response, Request, NextFunction } from "express";
 import { AppError } from "../errors/AppError.js"
-import { verify } from "node:crypto"
 import { verifyAccessToken } from "../lib/jwt.js"
 
 export function authenticate(
