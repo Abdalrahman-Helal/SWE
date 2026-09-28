@@ -45,6 +45,20 @@ async function run() {
   const afterIncrement = await redis.incr(stringKey);
   console.log("after increment", afterIncrement);
 
+   // hash stores multiple key value pairs under a single key
+  // key: keyname
+  // field: 
+  // name -> "John"
+  // email -> "john@example.com"
+
+  const hashKey = "demo:user:profile";
+
+  await redis.hSet(hashKey, {
+    name: "John",
+    city: "New York",
+  });
+
+  const extractProfileInfo = await redis.hGetAll(hashKey); 
 }
 
 
