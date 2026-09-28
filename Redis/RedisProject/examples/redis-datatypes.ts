@@ -59,6 +59,17 @@ async function run() {
   });
 
   const extractProfileInfo = await redis.hGetAll(hashKey); 
+
+  // list 
+  // redis lists are ordered collections of strings, they can be used as a queue or stack
+
+  const listKey = "demo:messages";
+  await redis.lPush(listKey,"hello") // lpush adds an element to the left of the list
+  await redis.rPush(listKey,"hi, redis"); // r push adds an element to the right of the list
+
+  const extractMessages = await redis.lRange(listKey, 0, -1);
+  console.log(extractMessages);
+
 }
 
 
