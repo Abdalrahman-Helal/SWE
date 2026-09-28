@@ -7,10 +7,12 @@ import { Router } from "express";
 import { healthRouter } from "./healthRoute.js";
 import { authRouter } from "./auth.routes.js";
 import { userTaskRouter } from "./user.task.routes.js";
+import { adminRouter } from "./admin.task.routes.js";
 
 export const apiRouter = Router();
 
 
 apiRouter.use(healthRouter);
 apiRouter.use('/auth', authRouter);
-apiRouter.use('/tasks',userTaskRouter);
+apiRouter.use('/tasks', userTaskRouter);
+apiRouter.use('/admin/tasks', adminRouter)
