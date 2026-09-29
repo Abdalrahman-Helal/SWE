@@ -1,3 +1,4 @@
+import { log } from "node:console";
 import { pool } from "../db/pool";
 import {
   Product,
@@ -5,6 +6,7 @@ import {
   CreateProductInput,
   UpdateProductInput,
 } from "../types/product";
+import { redisClient } from "../redis/client";
 
 function mapProductRow(row: ProductRow): Product {
   return {
@@ -19,7 +21,15 @@ function mapProductRow(row: ProductRow): Product {
   };
 }
 
-export async function getAllProducts(filters: {
+
+const PRODUCTS_ALL_CACHE_KEY ="products:all";
+const PRODUCT_CACHE_TTL_SECONDS = 60
+
+function getProductCacheKey(productId: number): string {
+  return `products:id:${productId}`
+}
+
+export async function fetchAllProductsFromDB(filters: {
   category?: string;
   search?: string;
 }): Promise<Product[]> {
@@ -42,7 +52,42 @@ export async function getAllProducts(filters: {
   return result.rows.map(mapProductRow);
 }
 
-export async function getProductById(id: number): Promise<Product | null> {
+export async function getAllProducts(filters: {
+  category?: string;
+  search?: string;
+}): Promise<Product[]>{
+  const hasFilters = Boolean(filters?.category || filters?.search)
+
+  // every filter combination need a seprate cache key,
+  // products:all:search:keyboard
+  // products:all:category:accessories
+  if(hasFilters){
+    console.log('cache bypass: filtered product list');
+    return fetchAllProductsFromDB(filters);
+  }
+
+  // redis is not the source of truth, we will always fetch the data from the database and update the cache
+  
+  const cachedProducts = await redisClient.get(PRODUCTS_ALL_CACHE_KEY)
+  if(cachedProducts){
+    console.log('cache hit: products:all');
+
+    return JSON.parse(cachedProducts) as Product[]
+  }
+
+  console.log('cache miss: products:all');
+  const products = await fetchAllProductsFromDB(filters)
+
+  // set our actual products list in the cache with a TTL of 60 seconds
+
+  await redisClient.setEx(PRODUCTS_ALL_CACHE_KEY, PRODUCT_CACHE_TTL_SECONDS, JSON.stringify(products));
+
+  console.log('cache set: products:all');
+
+  return products
+}
+
+export async function fetchSingleProductFromDB(id: number): Promise<Product | null> {
   const result = await pool.query<ProductRow>(
     "SELECT * FROM products WHERE id = $1",
     [id]
@@ -55,6 +100,42 @@ export async function getProductById(id: number): Promise<Product | null> {
   return mapProductRow(result.rows[0]);
 }
 
+export async function getProductById(id: number): Promise<Product | null> {
+  const cacheKey = getProductCacheKey(id);
+  const cacheProduct = await redisClient.get(cacheKey);
+  if(cacheProduct){
+    console.log('cache hit', cacheKey);
+
+    return JSON.parse(cacheProduct) as Product
+  }
+
+  console.log('cache miss', cacheKey);
+  const product = await fetchSingleProductFromDB(id);
+
+  if(!product){
+    return null;
+  }
+
+  await redisClient.setEx(cacheKey, PRODUCT_CACHE_TTL_SECONDS , JSON.stringify(product));
+
+  console.log('cache set', cacheKey);
+  return product;
+  
+}
+
+async function deleteProductAllCache(): Promise<void> {
+  await redisClient.del(PRODUCTS_ALL_CACHE_KEY);
+  console.log('cache deleted: products:all');
+  
+} 
+async function deleteSingleProductCache(productId:number): Promise<void>{
+  const cacheKey = getProductCacheKey(productId);
+
+  await redisClient.del(cacheKey);
+  console.log('cache deleted', cacheKey);
+  
+}
+
 export async function createProduct(
   input: CreateProductInput
 ): Promise<Product> {
@@ -65,14 +146,18 @@ export async function createProduct(
     [input.name, input.description, input.price, input.category, input.stock]
   );
 
-  return mapProductRow(result.rows[0]);
+  const newlyCreatedProduct = mapProductRow(result.rows[0]);
+
+  await deleteProductAllCache();
+
+  return newlyCreatedProduct;
 }
 
 export async function updateProduct(
   id: number,
   input: UpdateProductInput
 ): Promise<Product | null> {
-  const existing = await getProductById(id);
+  const existing = await fetchSingleProductFromDB(id);
   if (!existing) {
     return null;
   }
@@ -96,5 +181,10 @@ export async function updateProduct(
     [name, description, price, category, stock, id]
   );
 
-  return mapProductRow(result.rows[0]);
+  const product = mapProductRow(result.rows[0]);
+
+  await deleteProductAllCache();
+  await deleteSingleProductCache(id);
+
+  return product
 }
