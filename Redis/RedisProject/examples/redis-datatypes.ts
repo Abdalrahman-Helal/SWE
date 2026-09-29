@@ -97,6 +97,28 @@ async function run() {
 
   const rank = await redis.zRevRank(rankKey, "Bob"); // zRevRank returns the rank of the member in the sorted set, with the highest score being rank 0
   console.log("Bob's rank", rank);
+
+
+
+  // ttl time to live, we can set an expiration time for a key, after which the key will be automatically deleted
+
+
+  // key - a 
+  // value - 100
+  // ttl - 10 seconds
+  // after 10 seconds, the key will be automatically deleted
+
+  const otpKey = "demo:otp";
+
+  await redis.set(otpKey, "123456")
+
+  await redis.expire(otpKey, 10); // set ttl to 10 seconds
+
+  const ttl = await redis.ttl(otpKey);
+  console.log("ttl", ttl); // will print 10
+
+  await redis.quit();
+  
 }
 
 
