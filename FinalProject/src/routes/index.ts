@@ -8,6 +8,7 @@ import { healthRouter } from "./healthRoute.js";
 import { authRouter } from "./auth.routes.js";
 import { userTaskRouter } from "./user.task.routes.js";
 import { adminRouter } from "./admin.task.routes.js";
+import { adminBannerRouter } from "./admin.banner.route.js";
 
 export const apiRouter = Router();
 
@@ -15,4 +16,6 @@ export const apiRouter = Router();
 apiRouter.use(healthRouter);
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/tasks', userTaskRouter);
-apiRouter.use('/admin/tasks', adminRouter)
+apiRouter.use('/admin/tasks', adminRouter);
+
+apiRouter.use('/admin/banners', adminBannerRouter)
