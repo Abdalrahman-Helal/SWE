@@ -47,3 +47,24 @@ export async function uploadBannerImageToCloundinary(
     uploadStream.end(buffer);
   })
 }
+
+
+export async function deleteBannerImageFromCloundinary(publicId: string): Promise<void>{
+
+  const cloudName = env.cloudinaryCloudName;
+  const apiKey= env.cloudinaryApiKey;
+  const apiSecret = env.cloudinaryApiSecret;
+
+  if(!cloudName || !apiKey || !apiSecret){
+    throw new AppError(500,'Cloudinary is not configured');
+  }
+
+  // configure 
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret
+  })
+
+  return cloudinary.uploader.destroy(publicId);
+}

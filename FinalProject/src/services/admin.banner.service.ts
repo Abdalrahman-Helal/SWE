@@ -1,10 +1,11 @@
-import { create } from "node:domain";
+
 import { AppError } from "../errors/AppError.js"
 import { uploadBannerImageToCloundinary } from "../lib/cloundinary.js";
 import type { Banner } from "../types/banner.js"
-import { createAdminBanner, findAllAdminBannersFromDB } from "../repositories/admin.banner.repository.js";
-import { pool } from "../lib/db.js";
+import { createAdminBanner, deleteAdminBannerById, findAllAdminBannersFromDB } from "../repositories/admin.banner.repository.js";
+
 import { clearBannerCache, getBannerFromCache, setBannerToCache } from "../lib/bannerCache.js";
+import { addDeleteCloudinaryImageJob } from "../queues/deleteCloudinaryImage.queue.js";
 
 export async function createAdminBannerService(file: Express.Multer.File | undefined):Promise<Banner>{
   if(!file){
@@ -47,5 +48,19 @@ export async function fetchAllAdminBanners():Promise<Banner[]>{
   return banners;
 }
 
+
+export async function deleteAdminBannerService(bannerId: string): Promise<void>{
+  // delete from our db and get the public Id 
+  const publlicId = await deleteAdminBannerById(bannerId);
+
+  if(!publlicId){
+    throw new AppError(404, 'Banner not found');
+  }
+
+  await clearBannerCache();
+
+  // add BULLMQ job
+  await addDeleteCloudinaryImageJob(publlicId);
+}
 
 
