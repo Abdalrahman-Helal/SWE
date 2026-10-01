@@ -14,3 +14,13 @@ export async function createAdminBanner(
 
   return result.rows[0];
 }
+
+
+export async function findAllAdminBannersFromDB():Promise<Banner[]>{
+  const result = await pool.query<BannerRow>(
+    `SELECT id, img_url, cloudinary_public_id, created_at, updated_at
+    FROM banners
+    ORDER BY created_at DESC`
+  )
+  return result.rows;
+}
