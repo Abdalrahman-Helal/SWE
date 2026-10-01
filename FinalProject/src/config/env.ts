@@ -22,4 +22,5 @@ export const env = {
   cloudinaryCloudName: CheckRequiredEnvVariables('CLOUDINARY_CLOUD_NAME'),
   cloudinaryApiKey: CheckRequiredEnvVariables('CLOUDINARY_API_KEY'),
   cloudinaryApiSecret: CheckRequiredEnvVariables('CLOUDINARY_API_SECRET'),
+  redisUrl:CheckRequiredEnvVariables('REDIS_URL'),
 } as const;

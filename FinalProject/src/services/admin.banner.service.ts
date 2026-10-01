@@ -2,10 +2,11 @@ import { create } from "node:domain";
 import { AppError } from "../errors/AppError.js"
 import { uploadBannerImageToCloundinary } from "../lib/cloundinary.js";
 import type { Banner } from "../types/banner.js"
-import { createAdminBanner } from "../repositories/admin.banner.repository.js";
+import { createAdminBanner, findAllAdminBannersFromDB } from "../repositories/admin.banner.repository.js";
 import { pool } from "../lib/db.js";
+import { clearBannerCache, getBannerFromCache, setBannerToCache } from "../lib/bannerCache.js";
 
-export async function createAdminBannerService(file: Express.Multer.file | undefined):Promise<Banner>{
+export async function createAdminBannerService(file: Express.Multer.File | undefined):Promise<Banner>{
   if(!file){
     throw new AppError(400, 'Image is required');
   }
@@ -26,13 +27,24 @@ export async function createAdminBannerService(file: Express.Multer.file | undef
 
   const banner = await createAdminBanner(secureUrl, publicId)
 
+  // invalidate the cache after creating a new banner
+
+  await clearBannerCache();
+  
   return banner
 }
 
 
 export async function fetchAllAdminBanners():Promise<Banner[]>{
-  const result = await findAllAdminBannersFromDB();
-  return result;
+  const getCachedBanners = await getBannerFromCache();
+  if(getCachedBanners){
+    return getCachedBanners;
+  }
+  const banners = await findAllAdminBannersFromDB();
+
+  // set the data to cache after fetching from database
+  await setBannerToCache(banners);
+  return banners;
 }
 
 
