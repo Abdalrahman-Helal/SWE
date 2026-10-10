@@ -1,8 +1,10 @@
 import { AppError } from "../errors/AppError.js";
 import { MIN_PASSWORD_LENGTH , passwordSaltRounds} from '../constants/constants.js'
-import { createUser, findUserByEmail, findUserByEmailWithPassword } from "../repositories/user.repository.js";
+import { createGoogleUser, createUser, findUserByEmail, findUserByEmailWithPassword, findUserByGoogleId, linkGoogleIdToUser } from "../repositories/user.repository.js";
 import bcrypt from "bcryptjs";
 import { signAccessToken } from "../lib/jwt.js";
+import { getGoogleAuthUrl, getGoogleUserFromAuthCode } from "../lib/google.js";
+import type { User } from "../types/user.js";
 
 export async function registerUser(
   email:string,
@@ -21,9 +23,9 @@ export async function registerUser(
 
   const normalizeEmail = email.toLowerCase().trim()
 
-  // find the user if its already present in db or not 
+  // find the user if its already present in db or not
   // if present will not allow to register again with same email
-  
+
   const existingUser = await findUserByEmail(normalizeEmail);
 
   if(existingUser){
@@ -60,4 +62,38 @@ export async function loginUser(email: string , password: string): Promise<{acce
   })
 
   return { accessToken }
+}
+
+
+export function startGoogleLogin(): string {
+  return getGoogleAuthUrl();
+}
+
+function createAccessTokenForUser(user: User): string {
+  return signAccessToken({
+    userId: user.id,
+    email: user.email,
+    role: user.role
+  })
+}
+
+export async function loginWithGoogle(code: string): Promise<{accessToken: string}> {
+  const googleProfile = await getGoogleUserFromAuthCode(code);
+
+  let user = await findUserByGoogleId(googleProfile.googleId);
+
+  if(!user){
+    user = await findUserByEmail(googleProfile.email);
+
+    if(user){
+      // link this google account to existing user
+      user = await linkGoogleIdToUser(user.id, googleProfile.googleId);
+    } else{
+      // first time login - create the user in postgreDB
+      user = await createGoogleUser(googleProfile.email, googleProfile.googleId);
+    }
+  }
+
+  const accessToken = createAccessTokenForUser(user);
+  return { accessToken };
 }
