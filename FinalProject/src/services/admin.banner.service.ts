@@ -31,7 +31,7 @@ export async function createAdminBannerService(file: Express.Multer.File | undef
   // invalidate the cache after creating a new banner
 
   await clearBannerCache();
-  
+
   return banner
 }
 
@@ -50,7 +50,7 @@ export async function fetchAllAdminBanners():Promise<Banner[]>{
 
 
 export async function deleteAdminBannerService(bannerId: string): Promise<void>{
-  // delete from our db and get the public Id 
+  // delete from our db and get the public Id
   const publlicId = await deleteAdminBannerById(bannerId);
 
   if(!publlicId){
@@ -62,5 +62,3 @@ export async function deleteAdminBannerService(bannerId: string): Promise<void>{
   // add BULLMQ job
   await addDeleteCloudinaryImageJob(publlicId);
 }
-
-

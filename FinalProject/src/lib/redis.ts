@@ -14,6 +14,3 @@ export const bullmqConnection = {
   port: Number(redisUrl.port),
   maxRetriesPerRequest: null,
 };
-
-
-

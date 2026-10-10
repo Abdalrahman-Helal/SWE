@@ -20,7 +20,7 @@ export async function uploadBannerImageToCloundinary(
     throw new AppError(500,'Cloudinary is not configured');
   }
 
-  // configure 
+  // configure
   cloudinary.config({
     cloud_name: cloudName,
     api_key: apiKey,
@@ -43,7 +43,7 @@ export async function uploadBannerImageToCloundinary(
         publicId : result?.public_id ?? ''
       })
     })
-    // sending raw image bytes to cloudinary 
+    // sending raw image bytes to cloudinary
     uploadStream.end(buffer);
   })
 }
@@ -59,7 +59,7 @@ export async function deleteBannerImageFromCloundinary(publicId: string): Promis
     throw new AppError(500,'Cloudinary is not configured');
   }
 
-  // configure 
+  // configure
   cloudinary.config({
     cloud_name: cloudName,
     api_key: apiKey,

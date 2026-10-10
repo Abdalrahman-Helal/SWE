@@ -32,7 +32,7 @@ adminBannerRouter.get('/', async(req, res, next) => {
       success: true,
       data: { banners },
     });
-    
+
   }
   catch(error){
     next(error)
@@ -44,7 +44,7 @@ adminBannerRouter.delete('/:bannerId', async(req, res, next) => {
   try{
 
     await deleteAdminBannerService(req.params.bannerId)
-    
+
     res.status(200).json({
       success: true,
       message: 'banner deleted succesfully'

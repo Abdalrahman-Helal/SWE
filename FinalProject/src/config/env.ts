@@ -4,7 +4,7 @@ dotenv.config();
 
 function CheckRequiredEnvVariables(key: string): string {
   const value = process.env[key]
-  
+
   if (!value) {
     throw new Error(`Missing env variables for ${key}`)
   }

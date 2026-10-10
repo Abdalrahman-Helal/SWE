@@ -32,7 +32,7 @@ deleteCloudinaryImageWorker.on("completed", (job) => {
 deleteCloudinaryImageWorker.on("failed", (job, err) => {
   logger.error(
     {
-      err, jobId: job?.id 
+      err, jobId: job?.id
     },
     'Cloundinary delete job failed'
   )
