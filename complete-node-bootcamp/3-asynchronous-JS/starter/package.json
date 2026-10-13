@@ -7,9 +7,14 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "superagent": "^10.4.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10"
   }
 }
