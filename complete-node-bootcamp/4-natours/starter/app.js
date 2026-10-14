@@ -7,7 +7,7 @@ const app = express();
 
 // 1) MIDDLWARES
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
@@ -17,13 +17,12 @@ app.use(express.static(`${__dirname}/public`));
 app.use((req, res, next) => {
   console.log('Hello from the middleware');
   next();
-})
+});
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
-})
-
+});
 
 // 2) ROUTE HANDLERS
 
@@ -34,7 +33,6 @@ app.use((req, res, next) => {
 // app.get('/api/v1/tours/:id', getTour);
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
-
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users/', userRouter);
