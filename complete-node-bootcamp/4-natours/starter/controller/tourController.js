@@ -1,6 +1,4 @@
-const { json } = require('express');
 const Tour = require('./../models/tourModel');
-
 
 exports.getAllTours = async (req, res) => {
 
@@ -59,7 +57,7 @@ exports.createTour = async (req, res) => {
     res.status(400).json({
       status: 'fail',
       // message: err
-      message: 'Invalid data sent!'
+      message: err
     })
   }
 };
