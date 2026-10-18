@@ -1,4 +1,3 @@
-const { query } = require('../app');
 const Tour = require('./../models/tourModel');
 
 exports.getAllTours = async (req, res) => {
@@ -34,6 +33,16 @@ exports.getAllTours = async (req, res) => {
    } else {
     query = query.sort('-createdAt');
    }
+
+   if(req.query.fields) {
+    const fields = req.query.fields.split(',').join(' ');
+    query = query.select(fields)
+   } else {
+    query = query.select('-__v');
+   }
+
+
+   // 3) Field limiting
 
     const tours = await query;
     
