@@ -9,9 +9,10 @@ const router = express.Router();
 router
   .post('/signup',authController.signUp)
   .post('/login',authController.login);
+router.patch('/updateMyPassword', authController.protect, authController.updatePassword);
 router
   .route('/')
-  .get(userController.getAllUsers)
+  .get(authController.protect,userController.getAllUsers)
   .post(userController.createUser);
 
 router
