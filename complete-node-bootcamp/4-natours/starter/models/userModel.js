@@ -52,7 +52,7 @@ userSchema.pre('save', async function (next) {
   // only run this function if password acctually modified 
   if (!this.isModified('password')) return next();
 
-  if (!this.isNew) this.passwordChangedAt = Date.now() - 1000;
+  // if (!this.isNew) this.passwordChangedAt = Date.now() - 1000;
 
   // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12)
