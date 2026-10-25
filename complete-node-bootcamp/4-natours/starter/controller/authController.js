@@ -7,6 +7,7 @@ const AppError = require("../utils/appErrors");
 const sendEmail = require("../utils/email");
 
 
+// eslint-disable-next-line arrow-body-style
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
