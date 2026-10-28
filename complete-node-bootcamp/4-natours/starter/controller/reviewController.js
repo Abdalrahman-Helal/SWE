@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
-  const reviews = await Review.find();
+  const reviews = await Review.find().populate('reviews')
   res.status(200).json({
     status: 'success',
     result: reviews.length,
@@ -21,10 +21,7 @@ exports.createReview = catchAsync(async (req, res, next) => {
     // user : req.user.id,
     // tour: req.params.id
     req.body
-  ).populate({
-    path : 'Review',
-    
-  })
+  )
   res.status(201).json({
     status: 'success',
     data: { 
