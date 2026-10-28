@@ -21,7 +21,10 @@ exports.createReview = catchAsync(async (req, res, next) => {
     // user : req.user.id,
     // tour: req.params.id
     req.body
-  );
+  ).populate({
+    path : 'Review',
+    
+  })
   res.status(201).json({
     status: 'success',
     data: { 
