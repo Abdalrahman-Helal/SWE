@@ -6,10 +6,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
-const AppError = require('./utils/appErrors')
-const globalErrorHandler = require('./controller/errorController')
+const AppError = require('./utils/appErrors');
+const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRouts');
 
 const app = express();
 
@@ -74,6 +75,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users/', userRouter);
+app.use('/api/v1/reviews/', reviewRouter);
 
 
 
