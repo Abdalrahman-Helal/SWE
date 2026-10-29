@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utils/appErrors');
 const catchAsync = require('../utils/catchAsync')
-const factor = require('./handlerFactory');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {}
@@ -77,11 +77,8 @@ exports.createUser = (req, res) => {
   });
 };
 
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defiend',
-  });
-};
 
-exports.deleteUser = factor.deletOne(User);
+// Do NOT update passwords with this!
+exports.updateUser = factory.updateOne(User);
+
+exports.deleteUser = factory.deletOne(User);
