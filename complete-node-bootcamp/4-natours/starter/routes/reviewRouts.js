@@ -13,11 +13,10 @@ router.route('/')
     authController.protect,
     authController.restrictTo('user'),
     reviewController.createReview
-  )
+  );
 
 
-router.get('/',);
-router.post('/:id', authController.protect, reviewController.createReview);
-
+router.route('/:id')
+  .delete(reviewController.deleteReview);
 
 module.exports = router;

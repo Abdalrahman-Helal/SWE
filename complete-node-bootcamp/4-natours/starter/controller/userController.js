@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const AppError = require('../utils/appErrors');
 const catchAsync = require('../utils/catchAsync')
+const factor = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {}
@@ -83,9 +84,4 @@ exports.updateUser = (req, res) => {
   });
 };
 
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This route is not yet defiend',
-  });
-};
+exports.deleteUser = factor.deletOne(User);
