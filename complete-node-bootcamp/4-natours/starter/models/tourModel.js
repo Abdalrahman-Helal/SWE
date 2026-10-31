@@ -129,7 +129,7 @@ tourSchema.virtual('durationWeeks').get( function () {
 // tourSchema.index({ price: 1 });
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1})
-tourSchema.index({ stratLocation: '2dsphere' });
+tourSchema.index({ startLocation: '2dsphere' });
 
 // Virtual populate
 tourSchema.virtual('reviews',{
@@ -191,14 +191,14 @@ tourSchema.post(/^find/, function(docs, next) {
 
 
 // AGGREGATION MIDDLEWARE
-tourSchema.pre('aggregate', function(next){
+// tourSchema.pre('aggregate', function(next){
 
-  this.pipeline().unshift({ $match :  {secretTour : { $ne : true } } });
+//   this.pipeline().unshift({ $match :  {secretTour : { $ne : true } } });
 
-  // console.log(this.pipeline());
+//   // console.log(this.pipeline());
 
-  next();
-})
+//   next();
+// })
 
 
 
