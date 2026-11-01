@@ -1,7 +1,7 @@
 const express = require('express');
 
 const viewsController = require('../controller/viewsController');
-const { getTour } = require('../controller/tourController');
+
 
 
 const router = express.Router();
@@ -9,11 +9,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-  res.status(200).render('base', {
-    tour: 'The Forest Hiker',
-    user: 'Jonas'
-  });
-})
+  res.redirect('/overview');
+});
 
 
 router.get('/overview', viewsController.getOverview);
