@@ -8,8 +8,8 @@ const router = express.Router();
 
 
 router.get('/overview', viewsController.getOverview);
+router.get('/tour/:slug', viewsController.getTour);
 
-router.get('/tour', viewsController.getTour);
 
 
 module.exports = router;
